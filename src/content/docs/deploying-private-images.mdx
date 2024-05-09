@@ -1,0 +1,36 @@
+---
+title: Deploying private images
+description: This document describes how to deploy private images
+---
+
+## Introduction
+
+In this page you will learn how to deploy your apps in Docker Deploy.  
+But first, there are two very important things to mind:
+
+- How is your image built?
+- Where is your image stored?
+
+### How is your image built?
+
+Because we only support the ARM architecture (which allows us to offer such low prices), your docker image must be built for the arm64 platform. This means, your either need to build the image in a ARM machine, or use an emulator to build the right image.
+
+### Where is your image stored?
+
+For Docker Deploy to deploy your image, we need to be able to pull it. That's why you get a private repository from us (included in the account) to push your images, either from your CI/CD pipeline or directly from your computer.
+
+## Build and push your image
+
+### Build your image
+
+[Building and publish from your computer](/deploying-private-images-local)
+
+[Building and publish from Github](/deploying-private-images-github)
+
+## Reference your image
+
+Now you only need to reference your image in your Docker Compose file ([see example](https://github.com/jclapadula/docker-deploy/blob/main/templates/.yourApp.yml)):
+
+{' '}
+
+<img src="/images/docs/custom-image-tag.png" />

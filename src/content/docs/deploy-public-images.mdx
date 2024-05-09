@@ -1,0 +1,27 @@
+---
+title: Deploying public images
+description: This document describes how to deploy public images (usually open source) to Docker Deploy.
+---
+
+Deploy public images (usually open source) in Docker Deploy is quite easy!
+
+What you have to do is:
+
+1. Go to https://dockerdeploy.cloud/dashboard and Register
+2. When logged in, in the dashboard click **+ Create**
+
+   <img src="/images/docs/deployments-create-button.png" width="250" />
+
+3. In the next screen chose:
+
+   - A name for your deployment
+   - A size for the deployment. You can start with the smallest one and scale later ;)
+   - A Docker Compose file. You can chose one from the [templates](https://github.com/jclapadula/docker-deploy/tree/main/templates) or use another that you already have.
+   - An URL for your deployment (optional). If you don't have a domain, we will generate an URL for you.
+
+4. Save your deployment
+5. Hit **Deploy**
+6. If you bring your own URL, you need to create an A DNS record in the domain, pointing to the IP that is assigned to your deployment.
+   <img src="/images/docs/deloyment-header-custom-domain.png" width="800" />
+
+🚀 Thats it! The services you deployed should be working by now

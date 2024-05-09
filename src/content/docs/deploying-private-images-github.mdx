@@ -1,0 +1,27 @@
+---
+title: Deploying private images - Built in Github
+description: This document describes how to deploy images from Github
+parent: deploying-private-images
+---
+
+# Build with an emulator
+
+You can use the first example in [this docs](https://docs.docker.com/build/ci/github-actions/multi-platform/) as base. The important steps to add are:
+
+1. _Set up QEMU_
+2. _Set up Docker Buildx_
+3. And adding ```platforms: linux/arm64```` to the _Build and Push_ step
+
+# Build using an ARM runner
+
+ARM runners are still in beta in Github, but you can use a hosted runner to build in ARM.
+The easiest (and very cheap) way to get an ARM runner is to use [BuildJet](https://buildjet.com/for-github-actions/docs/getting-started/run-your-first-workflow). You can probably start with the smallest runner: `buildjet-2vcpu-ubuntu-2204-arm`
+
+# Push the image to the private registry
+
+In the action where you build and push the image:
+
+1. Use your private registry credentials in `docker/login-action@v3`. You also have to add `registry: registry.dockerdeploy.cloud`.
+2. Dont forget to add the proper tag to your image so it's pushed to your private registry. In `docker/build-push-action@v5` you would have something like: `tags: registry.dockerdeploy.cloud/youNamespace/your-app-name`
+
+Now you are ready to use your image in you deployment

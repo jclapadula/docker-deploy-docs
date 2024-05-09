@@ -1,0 +1,48 @@
+---
+title: Deploy from Dockerfile
+description: This document describes how you can deploy your Docker image if you only have a Dockerfile
+---
+
+If you have only your service and a Dockerfile, this page will help you deploy it successfully to Docker Deploy.
+
+Note that a Dockerfile and a Docker Compose file are not the same thing. [Here](https://stackoverflow.com/a/45549372) you have more info about them.
+
+## Pre-requirements
+
+To be able to deploy your app, your will first need the following:
+
+1. An app that runs.
+2. A Dockerfile that builds your image properly
+3. An account in dockerdeploy.cloud
+
+If something in this list is missing, go fix/get it first and then come back!
+
+## Install the Docker Deploy CLI
+
+To install the Docker Deploy CLI you need NodeJs installed in your PC. If you don't have it, you can download it from [here](https://nodejs.org/en/download/).
+
+Once npm is installed, you need to install `dockerdeploy-cli` by running the following command in a terminal:
+
+`npm i dockerdeploy-cli -g`
+
+You can see the help for the CLI by typing `dd-cli` in your terminal.
+
+## Login into Docker Deploy
+
+Once the dd-cli is installed, login into your account with  
+`dd-cli login`
+
+## Build and deploy the app
+
+Open a terminal in the directory where your Dockerfile is located.  
+Once there, run `dd-cli build`. This command build your image and pushes it to your private registry in Docker Deploy.
+
+After building the image, run `dd-cli deploy` to deploy your app. This command deploys your app and listens to the port 80 in your container, you can edit this configuration in the [dashboard](https://dockerdeploy.cloud/dashboard).
+
+## Add other services to your deployment
+
+If your app needs a DB or some other service to work, you can edit its Compose file in the [dashboard](https://dockerdeploy.cloud/dashboard) and add the missing services by hand. You can check our [templates](https://github.com/jclapadula/docker-deploy/tree/main/templates) to get inspired.
+
+## Something went wrong?
+
+If something didn't work as expected, just [get in contact](mailto:support@dockerdeploy.cloud) to get help.

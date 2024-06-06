@@ -31,7 +31,6 @@ export default defineConfig({
         },
         {
           label: "Quickstart",
-          //   autogenerate: { directory: "reference" },
           items: [
             { label: "Deploy from Dockerfile", link: "/dockerfile-to-compose" },
           ],
@@ -54,6 +53,10 @@ export default defineConfig({
               link: "/deploy-public-images",
             },
           ],
+        },
+        {
+          label: "Limitations",
+          link: "limitations",
         },
       ],
     }),

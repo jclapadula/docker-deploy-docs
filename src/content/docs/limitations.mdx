@@ -1,0 +1,16 @@
+---
+title: Limitations
+description: This document describes how the limitations present when deploying in Docker Deploy.
+---
+
+## Exposed services and ports
+
+As of now, you can expose only **HTTP** services in Docker Deploy. That means that you can still have a DB in your deployment, but it will not be accessible from the internet.
+
+Your service must specify one of the following ports:
+- 80
+- 8081-8085
+
+Internally it can listen to any port, but from the internet, only one of those can be used.
+
+> If you are interested in exposing a different port or a non-http service, please [get in touch](mailto:support@dockerdeploy.cloud)

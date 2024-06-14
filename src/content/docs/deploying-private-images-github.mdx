@@ -4,19 +4,7 @@ description: This document describes how to deploy images from Github
 parent: deploying-private-images
 ---
 
-# Build using an ARM runner
-
-You just need to use the new macOS runners that run on a M1 Processor.
-
-You do this by setting the `runs-on` property on your build job:
-
-```
-jobs:
-  test:
-    runs-on: macos-latest
-```
-
-# Push the image to the private registry
+## Push the image to the private registry
 
 In the action where you build and push the image:
 

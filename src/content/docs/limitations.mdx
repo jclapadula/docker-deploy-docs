@@ -3,10 +3,6 @@ title: Limitations
 description: This document describes how the limitations present when deploying in Docker Deploy.
 ---
 
-## Architecture
-
-You can only deploy docker images with ARM architecture. **All popular images support this platform**, but if you are building your own image, you will have to either do it in an ARM PC (github has ARM runners) or using an emulator.
-
 ## Ports
 
 You can only use one of the following ports to make your services accessible:
@@ -33,3 +29,7 @@ or
 ```
 
 But the number before **":"** should be one one of those mentioned above.
+
+## Architecture
+
+You can deploy both ARM and AMD64 images, but on our current infrastructure the ARM deployments will give you better performance for the same price.

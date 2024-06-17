@@ -55,7 +55,7 @@ export default defineConfig({
           label: "Framework/Tool Guids",
           items: [
             {
-              label: "Deploy an Next.js app",
+              label: "Deploy a Next.js app",
               link: "/framework-guides/next-js",
             },
           ],

@@ -51,6 +51,15 @@ export default defineConfig({
           label: "Limitations",
           link: "limitations",
         },
+        {
+          label: "Framework/Tool Guids",
+          items: [
+            {
+              label: "Deploy an Next.js app",
+              link: "/framework-guides/next-js",
+            },
+          ],
+        },
       ],
     }),
   ],

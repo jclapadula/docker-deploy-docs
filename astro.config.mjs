@@ -32,6 +32,7 @@ export default defineConfig({
         {
           label: "Quickstart",
           items: [
+            { label: "The CLI", link: "/quickstart/cli" },
             { label: "Deploy from Dockerfile", link: "/dockerfile-to-compose" },
           ],
         },
@@ -39,15 +40,7 @@ export default defineConfig({
           label: "How to Deploy",
           //   autogenerate: { directory: "reference" },
           items: [
-            { label: "Private images", link: "/deploying-private-images" },
-            {
-              label: "Private images - Local",
-              link: "/deploying-private-images-local",
-            },
-            {
-              label: "Private images - Github",
-              link: "/deploying-private-images-github",
-            },
+            { label: "Your app", link: "/deploying-private-images" },
             {
               label: "Public images",
               link: "/deploy-public-images",

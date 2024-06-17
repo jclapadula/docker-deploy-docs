@@ -1,6 +1,6 @@
 ---
-title: Deploying private images
-description: This document describes how to deploy private images
+title: Deploying your app
+description: This document describes how to deploy private images, like you own app, in Docker Deploy
 ---
 
 ## Introduction
@@ -8,17 +8,39 @@ description: This document describes how to deploy private images
 In this page you will learn how to deploy your apps in Docker Deploy.
 But first let's take a look on where are you private images stored.
 
-### Where is your image stored?
+**Where is your image stored?**
 
 For Docker Deploy to deploy your image, we need to be able to pull it. That's why you get a private repository from us (included in the account) to push your images, either from your CI/CD pipeline or directly from your computer.
 
+## Pre-requirements
+
+To be able to deploy your app, your will first need the following:
+
+1. An app that runs.
+2. A Dockerfile that builds your image properly
+3. An account in [Docker Deploy](https://dockerdeploy.cloud/dashboard)
+
+If something in this list is missing, go fix/get it first and then come back!
+
 ## Build and push your image
+### Locally
 
-### Build your image
+To be able to deploy your app locally, your will first need to install the [Docker Deploy CLI](/quickstart/cli).
 
-[Building and publish from your computer](/deploying-private-images-local)
+Then just run `dd-cli build` where your Dockerfile is located to build and publish your image into the image registry.
 
-[Building and publish from Github](/deploying-private-images-github)
+After building the image, you will see the **image tag** in the terminal. You can use it to reference your image in your compose files.
+
+### From Github
+
+_This assumes you already have a Github action that is capable of building your image_
+
+In the action where you build and push the image:
+
+1. Use your private registry credentials in `docker/login-action@v3`. You also have to add `registry: registry.dockerdeploy.cloud`.
+2. Dont forget to add the proper tag to your image so it's pushed to your private registry. In `docker/build-push-action@v5` you would have something like: `tags: registry.dockerdeploy.cloud/youNamespace/your-app-name`
+
+Now you are ready to use your image in you deployment
 
 ## Reference your image
 

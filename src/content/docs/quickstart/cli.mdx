@@ -1,0 +1,33 @@
+---
+title: Docker Deploy CLI
+description: This document describes how to install and use the CLI, so you can build and deploy apps from your PC
+---
+
+## Introduction
+
+In this guide you will learn how to install and use the Docker Deploy CLI.
+
+## Pre-requirements
+
+- To use the CLI you need Node.js installed in your PC. If you don't have it, you can download it from [here](https://nodejs.org/en/download/).
+- An account in [Docker Deploy](https://dockerdeploy.cloud/dashboard).
+
+## Install the CLI and log in
+
+To install the CLI you just need to run:
+```
+npm i dockerdeploy-cli -g
+```
+That way, the CLI is installed in your PC and you are ready to use it.
+
+Before creating and deploying images, you need to login into the CLI.
+```
+dd-cli login
+```
+
+## Help
+Call the CLI without arguments to see what you can do with it:
+
+```
+dd-cli
+```

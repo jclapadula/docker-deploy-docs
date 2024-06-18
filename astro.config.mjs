@@ -1,5 +1,6 @@
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
+import rehypeExternalLinks from "rehype-external-links";
 
 // https://astro.build/config
 export default defineConfig({
@@ -58,9 +59,16 @@ export default defineConfig({
               label: "Deploy a Next.js app",
               link: "/framework-guides/next-js",
             },
+            {
+              label: "Deploy an Astro app",
+              link: "/framework-guides/astro",
+            },
           ],
         },
       ],
     }),
   ],
+  markdown: {
+    rehypePlugins: [[rehypeExternalLinks, { target: "_blank" }]],
+  },
 });

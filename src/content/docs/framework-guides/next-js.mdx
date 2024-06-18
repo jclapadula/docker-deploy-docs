@@ -54,6 +54,8 @@ You can run ``dd-cli build`` to build your docker image and push it to your priv
 Afterwards, you just need to run ``dd-cli deploy`` to deploy the image that you just build into Docker Deploy.
 After deploying, you will get the URL to manage that deployment and the automatically generated URL.
 
+<img style="margin:auto;max-width:600px;margin-top:4px" src="/images/docs/cli-deploy-output.png" alt="Screenshot of CLI output after deploying" />
+
 ### Adjust the port
 By default, the deployments created through the CLI will listen to the port 80 of your app, but Next.js exposes port 3000 by default. So you have to go to you deployment in [the dashboard](https://dockerdeploy.cloud/dashboard), and change the ports section as follows:
 

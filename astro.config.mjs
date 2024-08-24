@@ -46,11 +46,11 @@ export default defineConfig({
               label: "Public images",
               link: "/deploy-public-images",
             },
+            {
+              label: "From Github",
+              link: "/deploy/github",
+            },
           ],
-        },
-        {
-          label: "Limitations",
-          link: "limitations",
         },
         {
           label: "Framework Guides",
@@ -64,6 +64,10 @@ export default defineConfig({
               link: "/framework-guides/astro",
             },
           ],
+        },
+        {
+          label: "Limitations",
+          link: "limitations",
         },
       ],
     }),

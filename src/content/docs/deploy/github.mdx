@@ -1,0 +1,104 @@
+---
+title: Build and Deploy from Github Action
+description: This document describes how to re-deploy your deployment from a github action.
+---
+
+## Introduction
+
+In this page you will learn how to build and deploy your apps in Docker Deploy from a Github Action, so your app is re-deployed automatically when you push new code.
+
+## Pre-requirements
+
+This guide assumes that you already have a deployment in Docker Deploy that runs.
+If that is not the case, you can read the guide on [how to delpoy your app](/deploying-private-images).
+
+## Secrets for deployment
+
+### Access token
+
+Access tokens let you perform actions in Docker Deploy without the need of logging in. This is useful to automate processes, like deploying your app.
+
+To create an access token, go to Account -> [Access Tokens](https://dockerdeploy.cloud/account/accessTokens).
+
+Then pick a name to identify your new Token and hit **Create**.
+
+Save this value somewhere, we will need it later and you will not be able to see it again later.
+
+<img src="/images/docs/access-token-created.png" width="800" />
+
+### Registry credentials
+
+If you want to deploy a private image, you have to publish it in the docker deploy registry.
+To deploy on it, you will need your registry credentials. You can see them in your app page, by hitting **Show registry credentials**:
+
+<img src="/images/docs/show-registry-credentials.png" width="300" />
+<img src="/images/docs/registry-credentials.png" width="500" />
+
+Keep this values too, as we will also need them to deploy.
+
+### Save the secrets in Github
+
+Now we need to save the Access token and the registry password.
+
+1. Go to the Github repository of your app
+2. Settings
+3. Secrets and variables -> Actions
+4. **New repository secret**
+5. Chose a name, like `DD_TOKEN`, and paste the value of your token in the Secret field.
+6. If your image is private, you also need to save the registry password, so create another secret called for example `DD_REGISTRY_PASS`
+7. Paste the value and save.
+
+At the end, you should have two secrets:
+
+<img src="/images/docs/github-secrets.png" width="800" />
+
+## Create an action
+
+1. Go to Actions in your repository
+2. Create a new one
+3. Paste this and replace with your values
+   - YOUR_REGISTRY_USERNAME: you see it when your press **Show registry credentials** in your deployment page
+   - YOUR_REGISTRY_NAMESPACE: you see it when your press **Show registry credentials** in your deployment page
+   - YOUR_APP_NAME: A name for your docker image
+   - YOUR_APP_ID: Is in the URL of your deployment page `dockerdeploy.cloud/dashboard/deployments/HERE`
+
+```yml
+name: Build and deploy
+on:
+  # Will run on when you push to main
+  push:
+    branches: [main]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          registry: registry.dockerdeploy.cloud
+          # Replace with your registry username
+          username: YOUR_REGISTRY_USERNAME
+          password: ${{ secrets.DD_REGISTRY_PASS }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          push: true
+          # Replace with your namespace and app name
+          tags: registry.dockerdeploy.cloud/YOUR_REGISTRY_NAMESPACE/YOUR_APP_NAME
+
+      - name: Re-deploy
+        run: |
+          curl -XPUT -f -H 'Authorization: PAT ${{ secrets.DD_TOKEN }}' \
+          'https://api.dockerdeploy.cloud/api/deployments/YOUR_APP_ID/deploy'
+```
+
+Thats it! Now, every time you push to main, you image will be built and deployed into Docker Deploy.

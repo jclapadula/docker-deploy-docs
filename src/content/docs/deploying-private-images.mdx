@@ -23,24 +23,12 @@ To be able to deploy your app, your will first need the following:
 If something in this list is missing, go fix/get it first and then come back!
 
 ## Build and push your image
-### Locally
 
 To be able to deploy your app locally, your will first need to install the [Docker Deploy CLI](/quickstart/cli).
 
 Then just run `dd-cli build` where your Dockerfile is located to build and publish your image into the image registry.
 
 After building the image, you will see the **image tag** in the terminal. You can use it to reference your image in your compose files.
-
-### From Github
-
-_This assumes you already have a Github action that is capable of building your image_
-
-In the action where you build and push the image:
-
-1. Use your private registry credentials in `docker/login-action@v3`. You also have to add `registry: registry.dockerdeploy.cloud`.
-2. Dont forget to add the proper tag to your image so it's pushed to your private registry. In `docker/build-push-action@v5` you would have something like: `tags: registry.dockerdeploy.cloud/youNamespace/your-app-name`
-
-Now you are ready to use your image in you deployment
 
 ## Reference your image
 
